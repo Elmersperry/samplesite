@@ -1,0 +1,74 @@
+body {
+    background-color: rgba(253, 181, 215, 0.829);
+    font-family: "Comic Sans MS"
+}
+
+/*
+*,
+*::after,
+*::before {
+    box-sizing: border-box
+}
+*/
+
+.images {
+    border: 1px solid rgb(0, 153, 255);
+    border-radius: 10px;
+    background-color: rgba(253, 181, 215, 0.829);
+    color: rgb(0, 153, 255);
+    text-align: left;
+    list-style: none;
+    margin-left: 0px;
+    width: 10%;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.img-fit {
+    width: 50%;
+    height: 50%;
+}
+
+.postings {
+    border: 1px solid rgb(0, 153, 255);
+    border-radius: 10px;
+    background-color: rgba(253, 181, 215, 0.829);
+    color: rgb(0, 153, 255);
+    text-align: left;
+    list-style: none;
+    margin-left: 0px;
+    width: 10%;
+    font-size: 20px;
+}
+
+.sidebar-1 {
+    display: flex;
+}
+
+#navbar-main {
+    border: 1px solid rgb(0, 153, 255);
+    border-radius: 10px;
+    background-color: rgba(253, 181, 215, 0.829);
+    color: rgb(0, 153, 255);
+    text-align: left;
+    list-style: none;
+    margin-left: 0px;
+    width: 10%;
+}
+
+#navbar-main li {
+    border: 1px solid rgb(0, 153, 255);
+    box-sizing: border-box;
+    background-color: pink;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+}
+
+.nav-link {
+    border: 1px solid rgb(0, 153, 255);
+    border-radius: 10px;
+    background-color: pink;
+    padding: 10px;
+    margin: 5px;
+}

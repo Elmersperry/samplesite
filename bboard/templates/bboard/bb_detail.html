@@ -1,0 +1,18 @@
+{% extends 'bboard/base.html' %}
+{% load static %}
+{% block content %}
+<h2>Информация об объявлении № {{ bb.pk }}</h2>
+<hr>
+<h3>{{ bb.title }}</h3>
+
+{% if bb.image %}
+    <img src="{{ bb.image.url }}" width="150px" height="auto">
+{% else %}
+    <img src="{% static 'img/no_image.jpg' %}" width="150px" height="auto">
+{% endif %}
+
+{{ bb.content }}
+{{ bb.price }}
+{{ bb.published }}
+
+{% endblock content %}
