@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from .models import Bb
 from .forms import BbForm
+from django.contrib.auth.decorators import login_required
 
 # Контроллеры:
 def index(request):
