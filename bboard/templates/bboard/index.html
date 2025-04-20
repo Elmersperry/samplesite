@@ -16,6 +16,7 @@
         {% for bb in bbs %}
         <sidebar class="sidebar-1">
             <ul class="navbars" id="navbar-main">
+<!--                <li><a>{{ bb.author }}</a></li>-->
                 <li><a href="{% url 'bboard:read_bb' pk=bb.pk %}">{{ bb.title }}</a></li>
                 <li><a>{{ bb.content }}</a></li>
                 <li><a>{{ bb.published|date:"d.m.Y H:i:s" }}</a></li>

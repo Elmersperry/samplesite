@@ -24,6 +24,7 @@ def add_bb(request):
         bb_form = BbForm(data=request.POST, files=request.FILES)
         if bb_form.is_valid():
             bb = Bb()
+            bb.author = bb_form.cleaned_data['author']
             bb.title = bb_form.cleaned_data['title']
             bb.content = bb_form.cleaned_data['content']
             bb.price = bb_form.cleaned_data['price']
@@ -41,6 +42,7 @@ def update_bb(request, pk):
     if request.method == "POST":
         bb_form = BbForm(data=request.POST, files=request.FILES)
         if bb_form.is_valid():
+            # bb.author = bb_form.cleaned_data['author']
             bb.title = bb_form.cleaned_data['title']
             bb.content = bb_form.cleaned_data['content']
             bb.price = bb_form.cleaned_data['price']
@@ -50,7 +52,8 @@ def update_bb(request, pk):
             # return read_bb(request, pk=bb.id)
     else:
         bb_form = BbForm(initial = {
-            'tite:': bb.title,
+            # 'author': bb.author,
+            'title:': bb.title,
             'content': bb.content,
             'price': bb.price,
             'image': bb.image,

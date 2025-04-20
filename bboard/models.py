@@ -2,8 +2,10 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 from slugify import slugify
+from django.contrib.auth.models import User
 
 class Bb(models.Model):
+    # author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор")
     title = models.CharField(max_length=50, verbose_name='Товар')
     content = models.TextField(null=True, blank=True, verbose_name='Описание')
     price = models.FloatField(null=True, blank=True, verbose_name='Цена')
