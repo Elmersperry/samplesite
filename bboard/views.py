@@ -24,7 +24,7 @@ def add_bb(request):
         bb_form = BbForm(data=request.POST, files=request.FILES)
         if bb_form.is_valid():
             bb = Bb()
-            bb.author = bb_form.cleaned_data['author']
+            # bb.author = bb_form.cleaned_data['author']
             bb.title = bb_form.cleaned_data['title']
             bb.content = bb_form.cleaned_data['content']
             bb.price = bb_form.cleaned_data['price']

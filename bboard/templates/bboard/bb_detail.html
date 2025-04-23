@@ -15,4 +15,16 @@
 {{ bb.price }}
 {{ bb.published }}
 
+<div class="bt-actions">
+    <div class="bt-edit-post">
+        <a href="{% url 'bboard:update_bb' pk=bb.id %}">
+            <button type="button">Редактировать</button>
+        </a>
+    </div>
+    <div class="bt-del-post">
+        <a href="{% url 'bboard:delete_bb' pk=bb.id %}">
+            <button type="button">Удалить</button>
+        </a>
+    </div>
+
 {% endblock content %}

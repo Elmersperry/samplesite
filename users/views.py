@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .forms import RegistrationForm
+from .forms import RegistrationForm, NewRegistrationForm
 from django.contrib.auth import login, logout, authenticate
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.models import User
@@ -9,14 +9,14 @@ from django.contrib.auth.decorators import login_required
 
 def register(request):
     if request.method == "POST":
-        form = RegistrationForm(request.POST)
+        form = NewRegistrationForm(request.POST)
         if form.is_valid():
             new_user = form.save(commit=False)
             new_user.set_password(form.cleaned_data['password'])
             new_user.save()
             context = {"title": "Регистрация завершена", "new_user": new_user}
             return render(request, template_name="users/registration_done.html", context=context)
-    form = RegistrationForm()
+    form = NewRegistrationForm()
     context = {"title": "Регистрация пользователя", "register_form": form}
     return render(request, template_name="users/registration.html", context=context)
 
