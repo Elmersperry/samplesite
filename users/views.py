@@ -44,4 +44,4 @@ def user_profile(request, pk):
     if request.user != user:
         raise PermissionDenied()
     context = {'user': user, 'title': 'Информация о пользователе'}
-    return render(request, template_name='usesr/proifile.html', context=context)
+    return render(request, template_name='users/profile.html', context=context)

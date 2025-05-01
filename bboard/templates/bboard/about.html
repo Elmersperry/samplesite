@@ -1,6 +1,8 @@
 {% extends 'bboard\base.html' %}
 {% load static %}
+<title>{{ title }}</title>
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/styles_1.css' %}">
-<p>О сайте</p>
+<p class="about-message">О сайте</p>
+<h3>На сайте <span><b>{{ count_bbs }}</b></span> объявлений</h3>
 {% endblock content %}

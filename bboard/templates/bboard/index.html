@@ -13,9 +13,9 @@
     <body>
         <h1 class="postings">Объявления</h1>
 <!--        <h1 class="postings">{{ bbs }}</h1>-->
-        {% for bb in bbs %}
-        <sidebar class="sidebar-1">
-            <ul class="navbars" id="navbar-main">
+        {% for bb in page_obj %}
+        <div class="sidebar-1">
+            <ul id="navbar-main">
 <!--                <li><a>{{ bb.author }}</a></li>-->
                 <li><a href="{% url 'bboard:read_bb' pk=bb.pk %}">{{ bb.title }}</a></li>
                 <li><a>{{ bb.content }}</a></li>
@@ -26,15 +26,29 @@
                 {% else %}
                     <img src="{% static 'img/no_image.jpg' %}" width="150px" height="auto">
                 {% endif %}
-
             </ul>
-        </sidebar>
+        </div>
+        {% endfor %}
 <!--        <div>-->
 <!--            <h2>{{ bb.title }}</h2>-->
 <!--            <p>{{ bb.content }}</p>-->
 <!--            <p>{{ bb.published|date:"d.m.Y H:i:s" }}</p>-->
 <!--        </div>-->
-        {% endfor %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo;Первая</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                {% endif %}
+                <span class="current">
+                    Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">Последняя&raquo;</a>
+                {% endif %}
+            </span>
+        </div>
     </body>
 </html>
 

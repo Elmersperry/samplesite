@@ -4,16 +4,24 @@ from django.template import loader
 from .models import Bb
 from .forms import BbForm
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 # Контроллеры:
+
 def index(request):
-    bbs = Bb.objects.all()
-    context = {"title": "Главная страница", "bbs": bbs}
-    # bbs = Bb.objects.order_by('-published')
-    return render(request, template_name='bboard/index.html', context={'bbs': bbs})
+    bbs = Bb.objects.all().order_by('-published')
+    count_bbs = Bb.objects.count()
+    per_page = 4
+    paginator = Paginator(bbs, per_page)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {"title": "Главная страница", "page_obj": page_obj, "count_bbs": count_bbs}
+    return render(request, template_name='bboard/index.html', context=context)
 
 def about(request):
-    return render(request, template_name='bboard/about.html')
+    count_bbs = Bb.objects.count()
+    context = {"title": "О сайте", "count_bbs": count_bbs}
+    return render(request, template_name='bboard/about.html', context=context)
 
 def add_bb(request):
     if request.method == "GET":

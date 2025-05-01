@@ -1,29 +1,29 @@
 {% extends 'bboard/base.html' %}
 {% load static %}
 {% block content %}
-<h2>Информация об объявлении № {{ bb.pk }}</h2>
+<h2 class="generic-description">Информация об объявлении № {{ bb.pk }}</h2>
 <hr>
-<h3>{{ bb.title }}</h3>
+<h3 class="generic-description">{{ bb.title }}</h3>
 
 {% if bb.image %}
     <img src="{{ bb.image.url }}" width="150px" height="auto">
 {% else %}
     <img src="{% static 'img/no_image.jpg' %}" width="150px" height="auto">
 {% endif %}
-{{ bb.author }}
-{{ bb.content }}
-{{ bb.price }}
-{{ bb.published }}
+<!--<p class="generic-description">{{ bb.author }}</p>-->
+<p class="generic-description">{{ bb.content }}</p>
+<p class="generic-description">{{ bb.price }}</p>
+<p class="generic-description">{{ bb.published }}</p>
 
 <div class="bt-actions">
     <div class="bt-edit-post">
         <a href="{% url 'bboard:update_bb' pk=bb.id %}">
-            <button type="button">Редактировать</button>
+            <button class="generic-button" type="button">Редактировать</button>
         </a>
     </div>
     <div class="bt-del-post">
         <a href="{% url 'bboard:delete_bb' pk=bb.id %}">
-            <button type="button">Удалить</button>
+            <button class="generic-button" type="button">Удалить</button>
         </a>
     </div>
 

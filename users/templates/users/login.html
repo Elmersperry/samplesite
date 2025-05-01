@@ -2,11 +2,13 @@
 
 {% block content %}
 
-<h3>Пожалуйста, войдите на сайт</h3>
-<form method="post">
+<h3 class="login-message">Пожалуйста, войдите на сайт</h3>
+<form class="reg-form" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Войти</button>
+<!--    {{ form.as_p }}-->
+    <p>Имя пользователя: {{ form.username }}</p>
+    <p>Пароль: {{ form.password }}</p>
+    <button class="generic-button" type="submit">Войти</button>
 </form>
 
 {% endblock content %}

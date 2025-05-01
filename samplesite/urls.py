@@ -6,7 +6,6 @@ from bboard.views import index, about, add_bb, update_bb, read_bb, delete_bb
 from samplesite import settings
 from django.conf.urls.static import static
 
-app_name='bboard'
 urlpatterns = [
     path('', index, name='index'),
     path('bboard/', include('bboard.urls')),
