@@ -33,12 +33,12 @@ def log_in(request):
     context = {'form': form}
     return render(request, template_name='users/login.html', context=context)
 
-# @login_required
+@login_required
 def log_out(request):
     logout(request)
     return redirect('bboard:index')
 
-# @login_required
+@login_required
 def user_profile(request, pk):
     user = get_object_or_404(User, pk=pk)
     if request.user != user:

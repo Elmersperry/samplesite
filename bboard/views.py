@@ -45,6 +45,7 @@ def read_bb(request, pk):
     context = {"title": "Информация об объявлении", "bb": bb}
     return render(request, template_name='bboard/bb_detail.html', context=context)
 
+@login_required
 def update_bb(request, pk):
     bb = Bb.objects.get(pk=pk)
     if request.method == "POST":
@@ -68,6 +69,7 @@ def update_bb(request, pk):
         })
         return render(request, template_name='bboard/bb_edit.html', context={'form': bb_form})
 
+@login_required
 def delete_bb(request, pk):
     bb = get_object_or_404(Bb, pk=pk)
     context = {"bb": bb}
