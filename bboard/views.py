@@ -39,6 +39,7 @@ def add_bb(request):
             bb.image = bb_form.cleaned_data['image']
             bb.save()
             return index(request)
+    return None
 
 def read_bb(request, pk):
     bb = Bb.objects.get(pk=pk)
@@ -59,6 +60,7 @@ def update_bb(request, pk):
             bb.save()
             return redirect('bboard:read_bb', pk=bb.id)
             # return read_bb(request, pk=bb.id)
+        return None
     else:
         bb_form = BbForm(initial = {
             # 'author': bb.author,
