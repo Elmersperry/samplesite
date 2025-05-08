@@ -18,7 +18,7 @@
     </head>
     <body>
         <h1 class="postings">Объявления</h1>
-<!--        <h1 class="postings">{{ bbs }}</h1>-->
+
         {% for bb in page_obj %}
         <div class="sidebar-1">
             <ul id="navbar-main">
@@ -35,11 +35,7 @@
             </ul>
         </div>
         {% endfor %}
-<!--        <div>-->
-<!--            <h2>{{ bb.title }}</h2>-->
-<!--            <p>{{ bb.content }}</p>-->
-<!--            <p>{{ bb.published|date:"d.m.Y H:i:s" }}</p>-->
-<!--        </div>-->
+
         <div class="pagination">
             <span class="step-links">
                 {% if page_obj.has_previous %}
