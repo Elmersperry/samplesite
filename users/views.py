@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .forms import RegistrationForm, NewRegistrationForm
-from django.contrib.auth import login, logout, authenticate
+from .forms import RegistrationForm, NewRegistrationForm, CustomPasswordChangeForm
+from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.models import User
 from samplesite.settings import LOGIN_REDIRECT_URL
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def register(request):
     if request.method == "POST":
@@ -45,3 +46,21 @@ def user_profile(request, pk):
         raise PermissionDenied()
     context = {'user': user, 'title': 'Информация о пользователе'}
     return render(request, template_name='users/profile.html', context=context)
+
+@login_required
+def change_password(request):
+    if request.method == "POST":
+        form = CustomPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            old_password = form.cleaned_data["old_password"]
+            if not request.user.check_password(old_password):
+                messages.error(request, "Старый пароль неверный")
+            else:
+                user = form.save()
+                update_session_auth_hash(request, user)
+                messages.success(request, "Ваш пароль успешно изменен")
+        else:
+            messages.error(request, "Пожалуйста, исправьте ошибки")
+    else:
+        form = CustomPasswordChangeForm(request.user)
+    return render(request, template_name='users/change_password.html', context={"form": form})

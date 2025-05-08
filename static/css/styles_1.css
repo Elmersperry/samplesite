@@ -135,3 +135,9 @@ body {
     margin: 5px;
     color: rgb(0, 153, 255);
 }
+
+.search-form {
+    display: flex;
+    justify-content: end;
+    margin-right: 50px;
+}

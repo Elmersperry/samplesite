@@ -5,27 +5,30 @@ from slugify import slugify
 from django.contrib.auth.models import User
 
 class Bb(models.Model):
-    # author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор", related_name="bbs")
     title = models.CharField(max_length=50, verbose_name='Товар')
     content = models.TextField(null=True, blank=True, verbose_name='Описание')
     price = models.FloatField(null=True, blank=True, verbose_name='Цена')
     published = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name='Опубликовано')
-    image = models.ImageField(upload_to='postings/', null=True, verbose_name='Изображение')
-    # slug = models.SlugField(max_length=200, unique=True, editable=False, null=True)
+    image = models.ImageField(upload_to='postings/', null=True, blank=True, verbose_name='Изображение')
+    slug = models.SlugField(max_length=200, unique=True, editable=False, null=True)
 
     rubric = models.ForeignKey('Rubric', null=True, on_delete=models.PROTECT, verbose_name='Рубрика')
 
-    # def save(self, *args, **kwargs):
-    #     self.slug = slugify(self.title)
-    #     super().save(*args, **kwargs)
-    #
-    # def get_absolute_url(self):
-    #     return reverse('bboard:read_bb', kwargs={'slug': self.slug})
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('bboard:read_bb', kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name_plural = 'Объявления'
         verbose_name = 'Объявление'
         ordering = ['-published']
+
+    def __str__(self):
+        return self.title
 
 class Rubric(models.Model):
     name = models.CharField(max_length=20, db_index=True, verbose_name='Название')

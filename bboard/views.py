@@ -5,6 +5,7 @@ from .models import Bb
 from .forms import BbForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.contrib.auth.models import User
 
 # Контроллеры:
 
@@ -23,53 +24,99 @@ def about(request):
     context = {"title": "О сайте", "count_bbs": count_bbs}
     return render(request, template_name='bboard/about.html', context=context)
 
+@login_required
 def add_bb(request):
     if request.method == "GET":
-        bb_form = BbForm()
+        bb_form = BbForm(author=request.user)
         context = {'title': 'Добавить объявление', 'form': bb_form}
         return render(request, template_name='bboard/bb_add.html', context=context)
     if request.method == "POST":
-        bb_form = BbForm(data=request.POST, files=request.FILES)
+        bb_form = BbForm(data=request.POST, files=request.FILES, author=request.user)
         if bb_form.is_valid():
-            bb = Bb()
-            # bb.author = bb_form.cleaned_data['author']
-            bb.title = bb_form.cleaned_data['title']
-            bb.content = bb_form.cleaned_data['content']
-            bb.price = bb_form.cleaned_data['price']
-            bb.image = bb_form.cleaned_data['image']
-            bb.save()
+            # bb = Bb()
+            # # bb.author = bb_form.cleaned_data['author']
+            # bb.title = bb_form.cleaned_data['title']
+            # bb.content = bb_form.cleaned_data['content']
+            # bb.price = bb_form.cleaned_data['price']
+            # bb.image = bb_form.cleaned_data['image']
+            bb_form.save()
             return index(request)
     return None
 
 def read_bb(request, pk):
-    bb = Bb.objects.get(pk=pk)
+    # bb = Bb.objects.get(pk=pk)
+    bb = get_object_or_404(Bb, pk=pk)
     context = {"title": "Информация об объявлении", "bb": bb}
     return render(request, template_name='bboard/bb_detail.html', context=context)
 
+# @login_required
+# def update_bb(request, slug):
+#     bb = get_object_or_404(Bb, slug=slug)
+#     if request.method == "POST":
+#         bb_form = BbForm(data=request.POST, files=request.FILES, author=request.user)
+#         if bb_form.is_valid():
+#             # bb.author = bb_form.cleaned_data['author']
+#             bb.title = bb_form.cleaned_data['title']
+#             bb.content = bb_form.cleaned_data['content']
+#             bb.price = bb_form.cleaned_data['price']
+#             bb.image = bb_form.cleaned_data['image']
+#             bb_form.save()
+#             # return redirect('bboard:read_bb', bb.slug)
+#             # return read_bb(request, bb.slug)
+#             # return redirect('bboard:read_bb', pk=bb.id)
+#             return render(request, template_name='bboard/bb_edit.html', context={'form': bb_form})
+# # return read_bb(request, pk=bb.id)
+#     else:
+#         bb_form = BbForm(initial = {
+#             'title:': bb.title,
+#             'content': bb.content,
+#             'price': bb.price,
+#             'image': bb.image,
+#         }, author=request.user)
+#         return render(request, template_name='bboard/bb_edit.html', context={'form': bb_form})
+
 @login_required
 def update_bb(request, pk):
-    bb = Bb.objects.get(pk=pk)
+    bb = get_object_or_404(Bb, pk=pk)
     if request.method == "POST":
-        bb_form = BbForm(data=request.POST, files=request.FILES)
+        bb_form = BbForm(data = request.POST, files = request.FILES, author=request.user)
         if bb_form.is_valid():
-            # bb.author = bb_form.cleaned_data['author']
+            bb.author = bb_form.cleaned_data['author']
             bb.title = bb_form.cleaned_data['title']
             bb.content = bb_form.cleaned_data['content']
             bb.price = bb_form.cleaned_data['price']
             bb.image = bb_form.cleaned_data['image']
             bb.save()
             return redirect('bboard:read_bb', pk=bb.id)
-            # return read_bb(request, pk=bb.id)
-        return None
     else:
         bb_form = BbForm(initial = {
-            # 'author': bb.author,
             'title:': bb.title,
+            'author': bb.author,
             'content': bb.content,
             'price': bb.price,
             'image': bb.image,
-        })
-        return render(request, template_name='bboard/bb_edit.html', context={'form': bb_form})
+        }, author=request.user)
+        return render(request, template_name="bboard/bb_edit.html", context = {"form": bb_form})
+
+# @login_required
+# def update_post(request, pk):
+#     post = Post.objects.get(pk=pk)
+#     if request.method == "POST":
+#         post_form = PostForm(data = request.POST, files = request.FILES, author=request.user)
+#         if post_form.is_valid():
+#             post.title = post_form.cleaned_data['title']
+#             post.text = post_form.cleaned_data['text']
+#             post.author = post_form.cleaned_data['author']
+#             post.image = post_form.cleaned_data['image']
+#             post.save()
+#             return redirect('blog:read_post', pk=post.id)
+#     else:
+#         post_form = PostForm(initial = {
+#             "title": post.title,
+#             "author": post.author,
+#             "text": post.text
+#         })
+#         return render(request, template_name="blog/post_edit.html", context = {"form": post_form})
 
 @login_required
 def delete_bb(request, pk):
@@ -80,13 +127,25 @@ def delete_bb(request, pk):
         return redirect('bboard:index')
     return render(request, template_name='bboard/bb_delete.html', context=context)
 
-    # template = loader.get_template('bboard\index.html')
-    # bbs = Bb.objects.order_by('-published')
-    # context = {'bbs': bbs}
-    # return HttpResponse(template.render(context, request))
+def page_not_found(request, exception):
+    return render(request, template_name="bboard/404.html", context = {"title": "404"})
 
-    # s = 'Список объявлений\r\n\r\n\r\n'
-    # for bb in Bb.objects.order_by('-published'):
-    #     s += bb.title + '\r\n' + bb.content + '\r\n\r\n'
-    # return HttpResponse(s, content_type='text/plain; charset=utf-8')
-    # return HttpResponse("Здесь будет выведен список объявлений.")
+def forbidden(request, exception):
+    return render(request, template_name="bboard/403.html", context = {"title": "403"})
+
+def server_error(request):
+    return render(request, template_name="bboard/500.html", context = {"title": "500"})
+
+def user_bbs(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    # bbs = user.bbs.all()
+    bbs = Bb.objects.filter(author=user).select_related('author')
+    context = {'user': user, 'bbs': bbs}
+    return render(request, template_name='bboard/user_bbs.html', context=context)
+
+@login_required
+def user_info(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    bbs = Bb.objects.filter(author=user).select_related('author')
+    context = {'user': user, 'bbs': bbs}
+    return render(request, template_name='bboard/user_info.html', context=context)

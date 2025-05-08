@@ -15,3 +15,8 @@ urlpatterns = [
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+handler404 = "bboard.views.page_not_found"
+handler403 = "bboard.views.forbidden"
+handler500 = "bboard.views.server_error"

@@ -1,0 +1,30 @@
+{% extends 'bboard/base.html' %}
+{% load static %}
+
+{% block content %}
+{% if user == request.user %}
+    <h3>Мои объявления</h3>
+{% else %}
+    <h3>Обьявления пользователя {{ user.username }}</h3>
+{% endif %}
+<div class="sidebar-1">
+    {% for bb in bbs %}
+        <div class="sidebar-1">
+            <ul id="navbar-main">
+
+                <li><a href="{% url 'bboard:read_bb' pk=bb.pk %}">{{ bb.title }}</a></li>
+                <li><a>{{ bb.author }}</a></li>
+                <li><a>{{ bb.content }}</a></li>
+                <li><a>{{ bb.published|date:"d.m.Y H:i:s" }}</a></li>
+
+                {% if bb.image %}
+                    <img src="{{ bb.image.url }}" width="150px" height="auto">
+                {% else %}
+                    <img src="{% static 'img/no_image.jpg' %}" width="150px" height="auto">
+                {% endif %}
+            </ul>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

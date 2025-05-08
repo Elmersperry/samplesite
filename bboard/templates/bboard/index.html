@@ -3,6 +3,12 @@
 
 {% block content %}
 <!-- <div class="images"><img src="{% static 'img/pink_house.jpg' %}" class='img-fit'></div> -->
+<div>
+<form class="search-form" action="" method="get">
+    <input type="search" name="query">
+    <button type="submit">Поиск</button>
+</form>
+</div>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,8 +22,8 @@
         {% for bb in page_obj %}
         <div class="sidebar-1">
             <ul id="navbar-main">
-<!--                <li><a>{{ bb.author }}</a></li>-->
                 <li><a href="{% url 'bboard:read_bb' pk=bb.pk %}">{{ bb.title }}</a></li>
+                <li><a href="{% url 'bboard:user_bbs' user_id=bb.author.pk %}">{{ bb.author }}</a></li>
                 <li><a>{{ bb.content }}</a></li>
                 <li><a>{{ bb.published|date:"d.m.Y H:i:s" }}</a></li>
 
