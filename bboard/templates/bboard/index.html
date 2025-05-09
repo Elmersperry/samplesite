@@ -2,13 +2,6 @@
 {% load static %}
 
 {% block content %}
-<!-- <div class="images"><img src="{% static 'img/pink_house.jpg' %}" class='img-fit'></div> -->
-<div>
-<form class="search-form" action="" method="get">
-    <input type="search" name="query">
-    <button type="submit">Поиск</button>
-</form>
-</div>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -17,24 +10,45 @@
         <title>Главная :: Доска объявлений</title>
     </head>
     <body>
-        <h1 class="postings">Объявления</h1>
-
-        {% for bb in page_obj %}
-        <div class="sidebar-1">
-            <ul id="navbar-main">
-                <li><a href="{% url 'bboard:read_bb' pk=bb.pk %}">{{ bb.title }}</a></li>
-                <li><a href="{% url 'bboard:user_bbs' user_id=bb.author.pk %}">{{ bb.author }}</a></li>
-                <li><a>{{ bb.content }}</a></li>
-                <li><a>{{ bb.published|date:"d.m.Y H:i:s" }}</a></li>
-
-                {% if bb.image %}
-                    <img src="{{ bb.image.url }}" width="150px" height="auto">
+        <header>
+            <div>
+              <ul class="nav">
+                <li><a class="nav-link active" aria-current="page" href="{% url 'bboard:index' %}">Главная</a></li>
+                <li><a class="nav-link" href="{% url 'bboard:about' %}">О сайте</a></li>
+                <li><a class="nav-link" href="{% url 'bboard:add_bb' %}">Создать объявление</a></li>
+                {% if not user.is_authenticated %}
+                    <li><a class="nav-link" href="{% url 'users:login' %}">Вход</a></li>
+                    <li><a class="nav-link" href="{% url 'users:register' %}">Регистрация</a></li>
                 {% else %}
-                    <img src="{% static 'img/no_image.jpg' %}" width="150px" height="auto">
+                    <li><a class="nav-link" href="{% url 'users:profile' pk=user.pk %}">{{user.username}}</a></li>
+                    <li><a class="nav-link" href="{% url 'users:logout' %}">Выйти</a></li>
+                    <li><a class="nav-link" href="{% url 'admin:index' %}">Администрирование Django</a></li>
                 {% endif %}
-            </ul>
+              </ul>
+            </div>
+        </header>
+        <div class="postings-declaration">
+        <h1>Объявления</h1>
+            <form class="search-form" action="" method="get">
+                <input type="search" name="query">
+                <button type="submit">Поиск</button>
+            </form>
         </div>
+        <div class="all-postings">
+        {% for bb in page_obj %}
+                <ul class="individual-container">
+                    {% if bb.image %}
+                        <img src="{{ bb.image.url }}" width="150px" height="auto">
+                    {% else %}
+                        <img src="{% static 'img/no_image.jpg' %}" width="150px" height="auto">
+                    {% endif %}
+                    <li><a href="{% url 'bboard:read_bb' pk=bb.pk %}">{{ bb.title }}</a></li>
+                    <li><a href="{% url 'bboard:user_bbs' user_id=bb.author.pk %}">{{ bb.author }}</a></li>
+                    <li><a>{{ bb.content }}</a></li>
+                    <li><a>{{ bb.published|date:"d.m.Y H:i:s" }}</a></li>
+                </ul>
         {% endfor %}
+        </div>
 
         <div class="pagination">
             <span class="step-links">
@@ -51,6 +65,11 @@
                 {% endif %}
             </span>
         </div>
+    <footer>
+        <div style="justify-content: ">
+            <h1 style="color: red; text-align: center; padding-top: 5%; padding-bottom: 5%;">hhhhhhhhh</h1>
+        </div>
+    </footer>
     </body>
 </html>
 

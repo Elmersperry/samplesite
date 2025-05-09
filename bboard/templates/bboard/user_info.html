@@ -2,6 +2,25 @@
 {% load static %}
 
 {% block content %}
+
+<header>
+            <div>
+              <ul class="nav">
+                <li><a class="nav-link active" aria-current="page" href="{% url 'bboard:index' %}">Главная</a></li>
+                <li><a class="nav-link" href="{% url 'bboard:about' %}">О сайте</a></li>
+                <li><a class="nav-link" href="{% url 'bboard:add_bb' %}">Создать объявление</a></li>
+                {% if not user.is_authenticated %}
+                    <li><a class="nav-link" href="{% url 'users:login' %}">Вход</a></li>
+                    <li><a class="nav-link" href="{% url 'users:register' %}">Регистрация</a></li>
+                {% else %}
+                    <li><a class="nav-link" href="{% url 'users:profile' pk=user.pk %}">{{user.username}}</a></li>
+                    <li><a class="nav-link" href="{% url 'users:logout' %}">Выйти</a></li>
+                    <li><a class="nav-link" href="{% url 'admin:index' %}">Администрирование Django</a></li>
+                {% endif %}
+              </ul>
+            </div>
+</header>
+
 <div class="generic-description">
 <h3>Информация о пользователе {{ user.username }}</h3>
 <div>Логин - {{ user.username }}</div>
@@ -16,23 +35,22 @@
 {% else %}
     <h3>Обьявления пользователя {{ user.username }}</h3>
 {% endif %}
-<div class="sidebar-1">
+<div class="all-postings">
     {% for bb in bbs %}
-        <div class="sidebar-1">
-            <ul id="navbar-main">
+        <ul class="individual-container">
 
-                <li><a href="{% url 'bboard:read_bb' pk=bb.pk %}">{{ bb.title }}</a></li>
-                <li><a>{{ bb.author }}</a></li>
-                <li><a>{{ bb.content }}</a></li>
-                <li><a>{{ bb.published|date:"d.m.Y H:i:s" }}</a></li>
+             {% if bb.image %}
+                <img src="{{ bb.image.url }}" width="150px" height="auto">
+            {% else %}
+                <img src="{% static 'img/no_image.jpg' %}" width="150px" height="auto">
+            {% endif %}
 
-                {% if bb.image %}
-                    <img src="{{ bb.image.url }}" width="150px" height="auto">
-                {% else %}
-                    <img src="{% static 'img/no_image.jpg' %}" width="150px" height="auto">
-                {% endif %}
-            </ul>
-        </div>
+            <li><a href="{% url 'bboard:read_bb' pk=bb.pk %}">{{ bb.title }}</a></li>
+            <li><a>{{ bb.author }}</a></li>
+            <li><a>{{ bb.content }}</a></li>
+            <li><a>{{ bb.published|date:"d.m.Y H:i:s" }}</a></li>
+
+        </ul>
     {% endfor %}
 </div>
 

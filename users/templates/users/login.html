@@ -2,6 +2,24 @@
 
 {% block content %}
 
+<header>
+            <div>
+              <ul class="nav">
+                <li><a class="nav-link active" aria-current="page" href="{% url 'bboard:index' %}">Главная</a></li>
+                <li><a class="nav-link" href="{% url 'bboard:about' %}">О сайте</a></li>
+                <li><a class="nav-link" href="{% url 'bboard:add_bb' %}">Создать объявление</a></li>
+                {% if not user.is_authenticated %}
+                    <li><a class="nav-link" href="{% url 'users:login' %}">Вход</a></li>
+                    <li><a class="nav-link" href="{% url 'users:register' %}">Регистрация</a></li>
+                {% else %}
+                    <li><a class="nav-link" href="{% url 'users:profile' pk=user.pk %}">{{user.username}}</a></li>
+                    <li><a class="nav-link" href="{% url 'users:logout' %}">Выйти</a></li>
+                    <li><a class="nav-link" href="{% url 'admin:index' %}">Администрирование Django</a></li>
+                {% endif %}
+              </ul>
+            </div>
+</header>
+
 <h3 class="login-message">Пожалуйста, войдите на сайт</h3>
 <form class="reg-form" method="post">
     {% csrf_token %}
