@@ -32,22 +32,22 @@ body {
 }
 
 header {
-    border: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     box-sizing: border-box;
     background-color: var(--inside-color);
-    border-radius: 10px;
+    border-radius: 0px;
     padding: 10px;
-    margin: 5px;
+    margin: 0px;
     color: var(--text-color);
 }
 
 footer {
-    border: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
     box-sizing: border-box;
     background-color: var(--inside-color);
-    border-radius: 10px;
+    border-radius: 0px;
     padding: 10px;
-    margin: 5px;
+    margin: 0px;
     color: var(--text-color);
 }
 
@@ -81,12 +81,13 @@ footer {
 
 .postings-declaration {
     text-align: center;
-    border: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     box-sizing: border-box;
     background-color: var(--inside-color);
-    border-radius: 10px;
+    border-radius: 0px;
     padding: 10px;
-    margin: 5px;
+    margin: 0px;
+    margin-bottom: 5px;
     color: var(--text-color);
 }
 
@@ -94,26 +95,98 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 .individual-container {
+    /*
     border: 1px solid var(--border-color);
     border-radius: 10px;
+    */
     background-color: var(--main_bg);
     color: var(--text-color);
     text-align: left;
     list-style: none;
     margin-left: 0px;
     width: 15%;
+    padding: 0px;
 }
-
+/*
 .individual-container li {
     border: 1px solid var(--border-color);
     box-sizing: border-box;
     background-color: var(--inside-color);
     border-radius: 10px;
-    padding: 10px;
+    padding: 0px;
     margin: 5px;
+}
+*/
+.bb-image {
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    background-color: var(--inside-color);
+    border-radius: 10px 10px 0px 0px;
+    padding: 0px;
+    margin: 0px;
+    height: 300px;
+}
+
+.image-positioning {
+    margin-top: 30%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 30%;
+}
+
+.bb-title {
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    background-color: var(--inside-color);
+    border-radius: 0px;
+    padding-left: 10px;
+    padding-top: 5px;
+    margin: 0px;
+    height:40px;
+}
+
+.bb-author {
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    background-color: var(--inside-color);
+    border-radius: 0px;
+    padding-left: 10px;
+    padding-top: 5px;
+    margin: 0px;
+    height:40px;
+}
+
+.bb-content {
+    overflow: hidden;
+    text-overflow: clip;
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    background-color: var(--inside-color);
+    border-radius: 0px;
+    padding-left: 10px;
+    padding-top: 5px;
+    margin: 0px;
+    height:40px;
+}
+
+.bb-published {
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    background-color: var(--inside-color);
+    border-radius: 0px 0px 10px 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+    margin: 0px;
+    height:40px;
 }
 
 .nav {
@@ -182,22 +255,26 @@ footer {
 
 .pagination {
     justify-content: center;
-    border: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     box-sizing: border-box;
     background-color: var(--inside-color);
-    border-radius: 10px;
+    border-radius: 0px;
     padding: 10px;
-    margin: 5px;
+    margin: 0px;
+    margin-bottom: 5px;
     color: var(--text-color);
 }
 
 .generic-description {
-    border: 1px solid var(--border-color);
+    overflow: hidden;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     box-sizing: border-box;
     background-color: var(--inside-color);
-    border-radius: 10px;
+    border-radius: 0px;
     padding: 10px;
-    margin: 5px;
+    margin: 0px;
     color: var(--text-color);
 }
 

@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 def index(request):
     bbs = Bb.objects.all().order_by('-published')
     count_bbs = Bb.objects.count()
-    per_page = 4
+    per_page = 3
     paginator = Paginator(bbs, per_page)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

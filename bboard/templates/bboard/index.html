@@ -38,14 +38,14 @@
         {% for bb in page_obj %}
                 <ul class="individual-container">
                     {% if bb.image %}
-                        <img src="{{ bb.image.url }}" width="150px" height="auto">
+                    <li class="bb-image"><div class="image-positioning"><img src="{{ bb.image.url }}" width="150px" height="150px"></div></li>
                     {% else %}
-                        <img src="{% static 'img/no_image.jpg' %}" width="150px" height="auto">
+                    <li class="bb-image"><div class="image-positioning"><img src="{% static 'img/no_image.jpg' %}" width="150px" height="150px"></div></li>
                     {% endif %}
-                    <li><a href="{% url 'bboard:read_bb' pk=bb.pk %}">{{ bb.title }}</a></li>
-                    <li><a href="{% url 'bboard:user_bbs' user_id=bb.author.pk %}">{{ bb.author }}</a></li>
-                    <li><a>{{ bb.content }}</a></li>
-                    <li><a>{{ bb.published|date:"d.m.Y H:i:s" }}</a></li>
+                    <li class="bb-title"><a href="{% url 'bboard:read_bb' pk=bb.pk %}">{{ bb.title }}</a></li>
+                    <li class="bb-author">Автор: <a href="{% url 'bboard:user_bbs' user_id=bb.author.pk %}">{{ bb.author }}</a></li>
+                    <li class="bb-content">Описание: <a>{{ bb.content }}</a></li>
+                    <li class="bb-published">Дата публикации: <a>{{ bb.published|date:"d.m.Y H:i:s" }}</a></li>
                 </ul>
         {% endfor %}
         </div>
