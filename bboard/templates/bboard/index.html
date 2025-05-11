@@ -38,9 +38,9 @@
         {% for bb in page_obj %}
                 <ul class="individual-container">
                     {% if bb.image %}
-                    <li class="bb-image"><div class="image-positioning"><img src="{{ bb.image.url }}" width="150px" height="150px"></div></li>
+                    <li class="bb-image"><div class="image-positioning"><img src="{{ bb.image.url }}"></div></li>
                     {% else %}
-                    <li class="bb-image"><div class="image-positioning"><img src="{% static 'img/no_image.jpg' %}" width="150px" height="150px"></div></li>
+                    <li class="bb-image"><div class="image-positioning"><img src="{% static 'img/no_image.jpg' %}"></div></li>
                     {% endif %}
                     <li class="bb-title"><a href="{% url 'bboard:read_bb' pk=bb.pk %}">{{ bb.title }}</a></li>
                     <li class="bb-author">Автор: <a href="{% url 'bboard:user_bbs' user_id=bb.author.pk %}">{{ bb.author }}</a></li>

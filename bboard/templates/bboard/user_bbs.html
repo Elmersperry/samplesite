@@ -22,9 +22,9 @@
 </header>
 
 {% if user == request.user %}
-    <h3>Мои объявления</h3>
+    <h2 class="declaration-user-info">Мои объявления</h2>
 {% else %}
-    <h3>Обьявления пользователя {{ user.username }}</h3>
+    <h2 class="declaration-user-info">Обьявления пользователя {{ user.username }}</h2>
 {% endif %}
 
 <div class="all-postings">
