@@ -24,9 +24,9 @@
 <h3 class="generic-description">{{ bb.title }}</h3>
 
 {% if bb.image %}
-    <img src="{{ bb.image.url }}" width="150px" height="auto">
+    <p class="generic-description"><img src="{{ bb.image.url }}" width="150px" height="auto"></p>
 {% else %}
-    <img src="{% static 'img/no_image.jpg' %}" width="150px" height="auto">
+    <p class="generic-description"><img src="{% static 'img/no_image.jpg' %}" width="150px" height="auto"></p>
 {% endif %}
 
 {% if user.is_authenticated %}
@@ -36,7 +36,7 @@
 {% else %}
     <p class="generic-description">{{ bb.author }}</p>
 {% endif %}
-<p class="generic-description">{{ bb.content }}</p>
+<p class="bb-content-detail">{{ bb.content }}</p>
 <p class="generic-description">{{ bb.price }}</p>
 <p class="generic-description">{{ bb.published }}</p>
 
