@@ -1,34 +1,34 @@
 from cProfile import label
 
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django.forms import PasswordInput
 from django.contrib.auth import password_validation
 from django.contrib.auth.forms import SetPasswordForm
 from django.core.exceptions import ValidationError
 
-class RegistrationForm(UserCreationForm):
-    username = forms.CharField(label="Имя пользователя",
-                               error_messages={
-                                   "required": "Пожалуйста, введите логин"
-                               })
-    first_name = forms.CharField(label="Имя")
-    last_name = forms.CharField(label="Фамилия")
-    email = forms.EmailField(label="Эл. почта")
-    password1 = forms.CharField(label="Пароль",
-                                widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Подтвердите пароль",
-                                widget=forms.PasswordInput,
-                                error_messages={
-                                    "required": "Пожалуйста, подтвердите пароль"
-                                })
+# class RegistrationForm(UserCreationForm):
+#     username = forms.CharField(label="Имя пользователя",
+#                                error_messages={
+#                                    "required": "Пожалуйста, введите логин"
+#                                })
+#     first_name = forms.CharField(label="Имя")
+#     last_name = forms.CharField(label="Фамилия")
+#     email = forms.EmailField(label="Эл. почта")
+#     password1 = forms.CharField(label="Пароль",
+#                                 widget=forms.PasswordInput)
+#     password2 = forms.CharField(label="Подтвердите пароль",
+#                                 widget=forms.PasswordInput,
+#                                 error_messages={
+#                                     "required": "Пожалуйста, подтвердите пароль"
+#                                 })
+#
+#     class Meta:
+#         model = User
+#         fields = ("username", "first_name", "last_name", "email", "password1", "password2")
 
-    class Meta:
-        model = User
-        fields = ("username", "first_name", "last_name", "email", "password1", "password2")
-
-class NewRegistrationForm(forms.ModelForm):
+class RegistrationForm(forms.ModelForm):
     password2 = forms.CharField(label="Подтвердите пароль", widget=forms.PasswordInput)
     class Meta:
         model = User
@@ -74,3 +74,17 @@ class CustomPasswordChangeForm(SetPasswordForm):
             raise ValidationError("Введенныее пароли не совпадают")
 
         return cleaned_data
+
+class UpdateUserForm(UserChangeForm):
+    password = None
+    username = forms.CharField(label="Имя пользователя",
+                               error_messages={
+                                   "required": "Пожалуйста, введите логин"
+                               })
+    first_name = forms.CharField(label="Имя")
+    last_name = forms.CharField(label="Фамилия")
+    email = forms.EmailField(label="Эл. почта")
+
+    class Meta:
+        model = User
+        fields = ("username", "first_name", "last_name", "email")

@@ -28,9 +28,16 @@
 <div>Фамилия - {{ user.last_name }}</div>
 <div>Электронная почта - {{ user.email }}</div>
 <div>Дата регистрации: {{ user.date_joined }}</div>
-<a href="{% url 'users:change_password' %}">
-    <button type="button">Сменить пароль</button>
+<p>
+<a href="{% url 'users:update_user' %}">
+    <button class="update-profile-button" type="button">Изменить данные пользователя</button>
 </a>
+</p>
+<p>
+<a href="{% url 'users:change_password' %}">
+    <button class="generic-button"  type="button">Сменить пароль</button>
+</a>
+</p>
 </div>
 
 {% endblock content %}
