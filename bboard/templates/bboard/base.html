@@ -10,24 +10,23 @@
 </head>
 <body>
 
-<!--<div class="nav-container">-->
-<!--    <details>-->
-<!--        <summary class="menu-details">Menu</summary>-->
-<!--  <ul class="nav">-->
-<!--    <li><a class="nav-link active" aria-current="page" href="{% url 'bboard:index' %}">Главная</a></li>-->
-<!--    <li><a class="nav-link" href="{% url 'bboard:about' %}">О сайте</a></li>-->
-<!--    <li><a class="nav-link" href="{% url 'bboard:add_bb' %}">Создать объявление</a></li>-->
-<!--    {% if not user.is_authenticated %}-->
-<!--        <li><a class="nav-link" href="{% url 'users:login' %}">Вход</a></li>-->
-<!--        <li><a class="nav-link" href="{% url 'users:register' %}">Регистрация</a></li>-->
-<!--    {% else %}-->
-<!--        <li><a class="nav-link" href="{% url 'users:profile' pk=user.pk %}">{{user.username}}</a></li>-->
-<!--        <li><a class="nav-link" href="{% url 'users:logout' %}">Выйти</a></li>-->
-<!--        <li><a class="nav-link" href="{% url 'admin:index' %}">Администрирование Django</a></li>-->
-<!--    {% endif %}-->
-<!--  </ul>-->
-<!--    </details>-->
-<!--</div>-->
+<header>
+    <div>
+      <ul class="nav">
+        <li><a class="nav-link active" aria-current="page" href="{% url 'bboard:index' %}">Главная</a></li>
+        <li><a class="nav-link" href="{% url 'bboard:about' %}">О сайте</a></li>
+        <li><a class="nav-link" href="{% url 'bboard:add_bb' %}">Создать объявление</a></li>
+        {% if not user.is_authenticated %}
+            <li><a class="nav-link" href="{% url 'users:login' %}">Вход</a></li>
+            <li><a class="nav-link" href="{% url 'users:register' %}">Регистрация</a></li>
+        {% else %}
+            <li><a class="nav-link" href="{% url 'users:profile' pk=user.pk %}">{{user.username}}</a></li>
+            <li><a class="nav-link" href="{% url 'users:logout' %}">Выйти</a></li>
+            <li><a class="nav-link" href="{% url 'admin:index' %}">Администрирование Django</a></li>
+        {% endif %}
+      </ul>
+    </div>
+</header>
 
 {% if messages %}
     {% for message in messages %}
@@ -37,5 +36,11 @@
 
 {% block content %}
 {% endblock content %}
+
+    <footer>
+        <div style="justify-content: ">
+           <p class="p-footer">Invisible Footer</p>
+       </div>
+    </footer>
 </body>
 </html>

@@ -2,75 +2,44 @@
 {% load static %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="{% static 'css/styles_1.css' %}">
-        <title>Главная :: Доска объявлений</title>
-    </head>
-    <body>
-        <header>
-            <div>
-              <ul class="nav">
-                <li><a class="nav-link active" aria-current="page" href="{% url 'bboard:index' %}">Главная</a></li>
-                <li><a class="nav-link" href="{% url 'bboard:about' %}">О сайте</a></li>
-                <li><a class="nav-link" href="{% url 'bboard:add_bb' %}">Создать объявление</a></li>
-                {% if not user.is_authenticated %}
-                    <li><a class="nav-link" href="{% url 'users:login' %}">Вход</a></li>
-                    <li><a class="nav-link" href="{% url 'users:register' %}">Регистрация</a></li>
-                {% else %}
-                    <li><a class="nav-link" href="{% url 'users:profile' pk=user.pk %}">{{user.username}}</a></li>
-                    <li><a class="nav-link" href="{% url 'users:logout' %}">Выйти</a></li>
-                    <li><a class="nav-link" href="{% url 'admin:index' %}">Администрирование Django</a></li>
-                {% endif %}
-              </ul>
-            </div>
-        </header>
-        <div class="postings-declaration">
-        <h1>Объявления</h1>
-            <form class="search-form" action="" method="get">
-                <input type="search" name="query">
-                <button type="submit">Поиск</button>
-            </form>
-        </div>
-        <div class="all-postings">
-        {% for bb in page_obj %}
-                <ul class="individual-container">
-                    {% if bb.image %}
-                    <li class="bb-image"><div class="image-positioning"><img src="{{ bb.image.url }}"></div></li>
-                    {% else %}
-                    <li class="bb-image"><div class="image-positioning"><img src="{% static 'img/no_image.jpg' %}"></div></li>
-                    {% endif %}
-                    <li class="bb-title"><a href="{% url 'bboard:read_bb' pk=bb.pk %}">{{ bb.title }}</a></li>
-                    <li class="bb-author">Автор: <a href="{% url 'bboard:user_bbs' user_id=bb.author.pk %}">{{ bb.author }}</a></li>
-                    <li class="bb-content">Описание: <a>{{ bb.content }}</a></li>
-                    <li class="bb-published">Дата публикации: <a>{{ bb.published|date:"d.m.Y H:i:s" }}</a></li>
-                </ul>
-        {% endfor %}
-        </div>
 
-        <div class="pagination">
-            <span class="step-links">
-                {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo;Первая</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
-                {% endif %}
-                <span class="current">
-                    Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
-                </span>
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">Следующая</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">Последняя&raquo;</a>
-                {% endif %}
-            </span>
-        </div>
-    <footer>
-        <div style="justify-content: ">
-            <p class="p-footer">Invisible Footer</p>
-        </div>
-    </footer>
-    </body>
-</html>
+<div class="postings-declaration">
+<h1>Объявления</h1>
+    <form class="search-form" action="" method="get">
+        <input type="search" name="query">
+        <button type="submit">Поиск</button>
+    </form>
+</div>
+<div class="all-postings">
+{% for bb in page_obj %}
+        <ul class="individual-container">
+            {% if bb.image %}
+            <li class="bb-image"><div class="image-positioning"><img src="{{ bb.image.url }}"></div></li>
+            {% else %}
+            <li class="bb-image"><div class="image-positioning"><img src="{% static 'img/no_image.jpg' %}"></div></li>
+            {% endif %}
+            <li class="bb-title"><a href="{% url 'bboard:read_bb' pk=bb.pk %}">{{ bb.title }}</a></li>
+            <li class="bb-author">Автор: <a href="{% url 'bboard:user_bbs' user_id=bb.author.pk %}">{{ bb.author }}</a></li>
+            <li class="bb-content">Описание: <a>{{ bb.content }}</a></li>
+            <li class="bb-published">Дата публикации: <a>{{ bb.published|date:"d.m.Y H:i:s" }}</a></li>
+        </ul>
+{% endfor %}
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo;Первая</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+        {% endif %}
+        <span class="current">
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+        </span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Следующая</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Последняя&raquo;</a>
+        {% endif %}
+    </span>
+</div>
 
 {% endblock content %}
