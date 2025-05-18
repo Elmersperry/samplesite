@@ -6,6 +6,7 @@ from .forms import BbForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 # Контроллеры:
 
@@ -103,6 +104,18 @@ def user_info(request, user_id):
     bbs = Bb.objects.filter(author=user).select_related('author')
     context = {'user': user, 'bbs': bbs}
     return render(request, template_name='bboard/user_info.html', context=context)
+
+def search_bb(request):
+    query = request.GET.get('query')
+    query_text = Q(title__icontains=query) | Q(content__icontains=query)
+    results = Bb.objects.filter(query_text)
+    per_page = 5
+    paginator = Paginator(results, per_page)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    count_bbs = results.count()
+    context = {"title": "Главная страница", "page_obj": page_obj, "count_bbs": count_bbs}
+    return render(request, template_name='bboard/index.html', context=context)
 
 # @login_required
 # def update_bb(request, slug):

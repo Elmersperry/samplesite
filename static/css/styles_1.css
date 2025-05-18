@@ -243,6 +243,11 @@ img {
     color: var(--text-color);
 }
 
+.generic-input-form {
+    border-radius: 10px;
+    border-color: var(--inside-color);
+}
+
 .generic-button {
     border: 1px solid var(--border-color);
     box-sizing: border-box;

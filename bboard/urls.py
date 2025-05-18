@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import index, about, add_bb, read_bb, update_bb, delete_bb, user_bbs, user_info
+from .views import index, about, add_bb, read_bb, update_bb, delete_bb, user_bbs, user_info, search_bb
 
 app_name = 'bboard'
 urlpatterns = [
+    path('search/', search_bb, name='search_bb'),
     path('', index, name='index'),
     path('bb/<int:pk>/delete/', delete_bb, name="delete_bb"),
     path('bb/<int:pk>/edit/', update_bb, name='update_bb'),

@@ -5,11 +5,14 @@
 
 <div class="postings-declaration">
 <h1>Объявления</h1>
-    <form class="search-form" action="" method="get">
-        <input type="search" name="query">
-        <button type="submit">Поиск</button>
+    <form class="search-form" action="{% url 'bboard:search_bb' %}" method="get">
+        <input class="generic-input-form" type="search" name="query">
+        <button class="generic-button" type="submit">Поиск</button>
     </form>
 </div>
+{% if page_obj|length == 0 %}
+<h2>По вашему запросу не найдени ни одного объявления!</h2>
+{% else %}
 <div class="all-postings">
 {% for bb in page_obj %}
         <ul class="individual-container">
@@ -41,5 +44,6 @@
         {% endif %}
     </span>
 </div>
+{% endif %}
 
 {% endblock content %}
