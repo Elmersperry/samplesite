@@ -31,6 +31,13 @@ body {
     color: var(--text-color);
 }
 
+.site-wrapper {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: minmax(0, 1fr);
+}
+
 header {
     border-bottom: 1px solid var(--border-color);
     box-sizing: border-box;
@@ -39,6 +46,10 @@ header {
     padding: 10px;
     margin: 0px;
     color: var(--text-color);
+}
+
+main {
+    height: 40%;
 }
 
 footer {

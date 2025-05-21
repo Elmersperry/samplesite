@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/styles_1.css' %}">
 </head>
 <body>
-
+<div class="site-wrapper">
 <header>
     <div>
       <ul class="nav">
@@ -34,13 +34,17 @@
     {% endfor %}
 {% endif %}
 
-{% block content %}
-{% endblock content %}
+<main>
+    {% block content %}
+    {% endblock content %}
+</main>
 
     <footer>
         <div style="justify-content: ">
            <p class="p-footer">Invisible Footer</p>
        </div>
     </footer>
+
+</div>
 </body>
 </html>
