@@ -10,8 +10,14 @@
         <button class="generic-button" type="submit">Поиск</button>
     </form>
 </div>
+<div>
+    <form class="filter-form" action="{% url 'bboard:filter_bb' %}" method="get">
+        {{ filter_form.as_p }}
+        <button class="generic-button" type="submit">Искать по автору и дате</button>
+    </form>
+</div>
 {% if page_obj|length == 0 %}
-<h2>По вашему запросу не найдени ни одного объявления!</h2>
+<h2>По вашему запросу не найдено ни одного объявления!</h2>
 {% else %}
 <div class="all-postings">
 {% for bb in page_obj %}

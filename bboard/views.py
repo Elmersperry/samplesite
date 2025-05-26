@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template import loader
 from .models import Bb
-from .forms import BbForm
+from .forms import BbForm, FilterForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
@@ -17,7 +17,8 @@ def index(request):
     paginator = Paginator(bbs, per_page)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    context = {"title": "Главная страница", "page_obj": page_obj, "count_bbs": count_bbs}
+    filter_form = FilterForm()
+    context = {"title": "Главная страница", "page_obj": page_obj, "count_bbs": count_bbs, "filter_form": filter_form}
     return render(request, template_name='bboard/index.html', context=context)
 
 def about(request):
@@ -115,6 +116,23 @@ def search_bb(request):
     page_obj = paginator.get_page(page_number)
     count_bbs = results.count()
     context = {"title": "Главная страница", "page_obj": page_obj, "count_bbs": count_bbs}
+    return render(request, template_name='bboard/index.html', context=context)
+
+def filter_bb(request):
+    author_id = request.GET.get('author')
+    if not author_id:
+        results = Bb.objects.all()
+    else:
+        author = User.objects.get(pk=author_id)
+        query_text = Q(author__exact=author)
+        results = Bb.objects.filter(query_text)
+    per_page = 5
+    paginator = Paginator(results, per_page)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    count_bbs = results.count()
+    filter_form = FilterForm()
+    context = {"title": "Главная страница", "page_obj": page_obj, "count_bbs": count_bbs, "filter_form": filter_form}
     return render(request, template_name='bboard/index.html', context=context)
 
 # @login_required

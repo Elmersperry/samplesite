@@ -327,6 +327,13 @@ img {
     margin-bottom: 20px;
 }
 
+.filter-form {
+    display: flex;
+    justify-content: end;
+    margin-right: 50px;
+    margin-top: 20px;
+}
+
 .menu-details {
     list-style; none;
     border: 1px solid var(--border-color);
