@@ -1,9 +1,20 @@
 :root {
-    --main_bg: rgba(253, 181, 215, 0.829);
-    --border-color: rgb(0, 153, 255);
-    --text-color: rgb(0, 153, 255);
-    --inside-color: pink;
+    --main_bg: #C0C0C0;
+    --border-color: white;
+    --text-color: white;
+    --inside-color: #A0A0A0;
 }
+
+a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+a:visited, a:active, a:focus, a:hover {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
 
 /*
 :root {
