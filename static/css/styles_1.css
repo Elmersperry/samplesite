@@ -3,6 +3,7 @@
     --border-color: white;
     --text-color: white;
     --inside-color: #A0A0A0;
+    --bb-content-detail-background-color: #606060;
 }
 
 a {
@@ -15,13 +16,13 @@ a:visited, a:active, a:focus, a:hover {
     text-decoration: none;
 }
 
-
 /*
 :root {
     --main_bg: rgba(253, 181, 215, 0.829);
     --border-color: rgb(0, 153, 255);
     --text-color: rgb(0, 153, 255);
     --inside-color: pink;
+    --bb-content-detail-background-color: white;
 }
 */
 
@@ -320,11 +321,11 @@ img {
     white-space: normal;
     word-break: break-word;
     overflow: auto;
-    height: 20%;
+    height: 60%;
     width: 30%;
     border: 1px solid var(--border-color);
     box-sizing: border-box;
-    background-color: white;
+    background-color: var(--bb-content-detail-background-color);
     border-radius: 10px;
     padding: 10px;
     margin: 0px;
