@@ -35,16 +35,18 @@
             </a>
         </div>
     </div>
-{% endif %}
+{% else %}
 
-{% if user.is_superuser %}
-    <div class="bt-actions">
-        <div class="bt-del-post">
-            <a href="{% url 'bboard:delete_bb' pk=bb.id %}">
-                <button class="generic-button" type="button">Удалить</button>
-            </a>
+    {% if user.is_superuser %}
+        <div class="bt-actions">
+            <div class="bt-del-post">
+                <a href="{% url 'bboard:delete_bb' pk=bb.id %}">
+                    <button class="generic-button" type="button">Удалить</button>
+                </a>
+            </div>
         </div>
-    </div>
+    {% endif %}
+
 {% endif %}
 
 {% endblock content %}

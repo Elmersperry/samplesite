@@ -334,14 +334,14 @@ img {
 
 .search-form {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 .filter-form {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     margin-right: 50px;
     margin-top: 20px;
 }
