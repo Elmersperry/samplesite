@@ -26,7 +26,7 @@ class BbForm(forms.ModelForm):
         labels = {
             'title': 'Заголовок',
             'content': 'Содержание',
-            'price': 'Цена',
+            'price': 'Цена (в Рублях)',
             'image': 'Изображение',
         }
 
