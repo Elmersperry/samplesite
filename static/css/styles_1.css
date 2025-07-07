@@ -26,6 +26,48 @@ html[data-color-scheme='pink'] {
     margin: 0px;
 }
 
+html[data-color-scheme='blue'] {
+
+    --main_bg: rgba(214, 234, 248);
+    --border-color: blue;
+    --text-color: blue;
+    --inside-color: rgb(174, 214, 241);
+    --bb-content-detail-background-color: white;
+
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+html[data-color-scheme='green'] {
+
+    --main_bg: #03fc0f;
+    --border-color: red;
+    --text-color: red;
+    --inside-color: #42d705;
+    --bb-content-detail-background-color: #84fc53;
+
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+html[data-color-scheme='yellow'] {
+
+    --main_bg: #ffed6b;
+    --border-color: black;
+    --text-color: black;
+    --inside-color: #f9c84f;
+    --bb-content-detail-background-color: white;
+
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
 a {
     text-decoration: none;
     color: var(--text-color);
