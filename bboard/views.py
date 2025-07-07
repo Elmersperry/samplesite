@@ -120,6 +120,7 @@ def search_bb(request):
 
 def filter_bb(request):
     author_id = request.GET.get('author')
+    published_id = request.GET.get('published')
     if not author_id:
         results = Bb.objects.all()
     else:
