@@ -32,15 +32,19 @@
     </div>
 </header>
 
-{% if messages %}
-    {% for message in messages %}
-        <div>{{ message }}</div>
-    {% endfor %}
-{% endif %}
+
 
 <main>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div>{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
     {% block content %}
     {% endblock content %}
+
 </main>
 
     <footer>
