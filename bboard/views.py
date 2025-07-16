@@ -118,21 +118,42 @@ def search_bb(request):
     context = {"title": "Главная страница", "page_obj": page_obj, "count_bbs": count_bbs}
     return render(request, template_name='bboard/index.html', context=context)
 
+# def filter_bb(request):
+#     author_id = request.GET.get('author')
+#     published_id = request.GET.get('published')
+#     if not author_id:
+#         results = Bb.objects.all()
+#     else:
+#         author = User.objects.get(pk=author_id)
+#         query_text = Q(author__exact=author)
+#         results = Bb.objects.filter(query_text)
+#     per_page = 5
+#     paginator = Paginator(results, per_page)
+#     page_number = request.GET.get('page')
+#     page_obj = paginator.get_page(page_number)
+#     count_bbs = results.count()
+#     filter_form = FilterForm()
+#     context = {"title": "Главная страница", "page_obj": page_obj, "count_bbs": count_bbs, "filter_form": filter_form}
+#     return render(request, template_name='bboard/index.html', context=context)
+
 def filter_bb(request):
-    author_id = request.GET.get('author')
-    published_id = request.GET.get('published')
-    if not author_id:
-        results = Bb.objects.all()
-    else:
-        author = User.objects.get(pk=author_id)
-        query_text = Q(author__exact=author)
-        results = Bb.objects.filter(query_text)
+    filter_form = FilterForm(request.GET)
+    query = Bb.objects.all()
+
+    if filter_form.is_valid():
+        author = filter_form.cleaned_data['author']
+        created_at = filter_form.cleaned_data['created_at']
+        if author:
+            query = query.filter(author__exact=author)
+        if created_at:
+            query = query.filter(published__icontains=created_at)
+
     per_page = 5
-    paginator = Paginator(results, per_page)
+    paginator = Paginator(query, per_page)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    count_bbs = results.count()
-    filter_form = FilterForm()
+    count_bbs = query.count()
+
     context = {"title": "Главная страница", "page_obj": page_obj, "count_bbs": count_bbs, "filter_form": filter_form}
     return render(request, template_name='bboard/index.html', context=context)
 
