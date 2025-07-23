@@ -11,14 +11,14 @@
 <div class="site-wrapper">
 <header>
     <div>
-      <span>Цветовая палитра:</span>
-      <select class="generic-button" name="color-scheme" size="1" onclick="changeColor()">
-                <option value="grey">Серая</option>
-                <option value="pink">Розовая</option>
-                <option value="blue">Голубая</option>
-                <option value="green">Зелёная</option>
-                <option value="yellow">Жёлтая</option>
-            </select>
+<!--      <span>Цветовая палитра:</span>-->
+<!--      <select class="generic-button" name="color-scheme" size="1" onclick="changeColor()">-->
+<!--                <option value="grey">Серая</option>-->
+<!--                <option value="pink">Розовая</option>-->
+<!--                <option value="blue">Голубая</option>-->
+<!--                <option value="green">Зелёная</option>-->
+<!--                <option value="yellow">Жёлтая</option>-->
+<!--      </select>-->
       <ul class="nav">
         <li><a class="nav-link active" aria-current="page" href="{% url 'bboard:index' %}">Главная</a></li>
         <li><a class="nav-link" href="{% url 'bboard:about' %}">О сайте</a></li>
@@ -29,7 +29,6 @@
         {% else %}
             <li><a class="nav-link" href="{% url 'users:profile' pk=user.pk %}">{{user.username}}</a></li>
             <li><a class="nav-link" href="{% url 'users:logout' %}">Выйти</a></li>
-            <li><a class="nav-link" href="{% url 'admin:index' %}">Администрирование Django</a></li>
         {% endif %}
       </ul>
     </div>
@@ -51,8 +50,11 @@
 </main>
 
     <footer>
-        <div style="justify-content: ">
-           <p class="p-footer">Invisible Footer</p>
+        <div class="p-footer">
+            <p >Телефон: (999)999-99-99</p>
+            <p>Почта: BoomerGame@mail.ru</p>
+            <p>Адрес: г. Москва, ул. Пушкина, 100</p>
+            <p>Данный сайт является учебным проектом</p>
        </div>
     </footer>
 

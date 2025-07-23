@@ -130,9 +130,9 @@ footer {
 
 .p-footer {
     text-align: justify;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    color: var(--inside-color);
+    padding-top: 40px;
+    padding-bottom: 40px;
+    color: var(--text-color);
 }
 
 img {
